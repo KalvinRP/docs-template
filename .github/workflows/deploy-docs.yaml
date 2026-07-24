@@ -39,7 +39,7 @@ jobs:
       - name: Build Astro Site
         run: |
           cd documentation
-          npm ci
+          npm install
           npm run build
 
       # 3. Publish ke GitHub Pages
