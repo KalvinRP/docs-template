@@ -1,3 +1,4 @@
-docs/node_modules/
-docs/.astro/
+documentation/node_modules/
+documentation/.astro/
+documentation/dist/
 node_modules/

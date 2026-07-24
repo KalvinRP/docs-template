@@ -23,7 +23,22 @@ function readReadmeMeta() {
 
 const meta = readReadmeMeta();
 
+// GitHub Pages project site berada di sub-path (misal /docs-template), jadi Astro
+// perlu tahu `site` + `base` agar URL aset (_astro/*.css) tidak menunjuk ke root
+// domain. Nilainya diturunkan dari GITHUB_REPOSITORY ("owner/repo") supaya
+// template ini tetap benar saat di-fork tanpa perlu diedit manual.
+function readPagesUrls() {
+  const [owner, repo] = (process.env.GITHUB_REPOSITORY ?? '').split('/');
+  if (!owner || !repo) return {};
+  const isUserSite = repo.toLowerCase() === `${owner.toLowerCase()}.github.io`;
+  return {
+    site: `https://${owner.toLowerCase()}.github.io`,
+    base: isUserSite ? undefined : `/${repo}`,
+  };
+}
+
 export default defineConfig({
+  ...readPagesUrls(),
   integrations: [
     starlight({
       title: meta.title || 'Dokumentasi',
