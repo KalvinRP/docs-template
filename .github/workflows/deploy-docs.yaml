@@ -26,19 +26,19 @@ jobs:
 
       # 1. Jalankan Skrip Python (Membaca Preset + Memecah README jadi Multi-Page)
       - name: Split README & Apply Preset
-        run: python3 docs/dev-build.py
+        run: python3 documentation/dev-build.py
 
       # 2. Build Web Astro
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm'
-          cache-dependency-path: 'docs/package-lock.json'
+          cache-dependency-path: 'documentation/package-lock.json'
 
       - name: Build Astro Site
         run: |
-          cd docs
+          cd documentation
           npm ci
           npm run build
 
@@ -46,7 +46,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/dist
+          path: documentation/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
