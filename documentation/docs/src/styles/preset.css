@@ -1,0 +1,127 @@
+/* =========================================================================
+   PRESET THEMES
+   -------------------------------------------------------------------------
+   Preset dipilih lewat penanda di README:  <!-- PRESET: crimson -->
+   dev-build.py lalu menaruh <div data-theme-preset="crimson"> di konten.
+
+   Trik utama: :root:has([data-theme-preset="X"]) memilih elemen ROOT
+   berdasarkan div yang ada di dalamnya, lalu memasang variabel di :root —
+   sehingga SELURUH situs (sidebar, header, konten) ikut bertema, bukan cuma
+   badan artikel. Murni CSS, pakai font sistem, tanpa setup lain.
+
+   DEFAULT: bila README tak punya penanda PRESET, dev-build.py tidak menaruh
+   div apa pun, jadi tak ada satu pun aturan di bawah yang aktif → situs tampil
+   dengan tema bawaan Astro Starlight (tidak ada yang di-override).
+
+   Tiap preset mengatur beberapa "knob":
+     --sl-color-accent-*  : warna aksen bawaan Starlight
+     --sl-font            : font seluruh situs (font sistem)
+     --preset-radius      : kelengkungan sudut (code block, gambar, card)
+     --preset-hspacing    : letter-spacing heading
+   ========================================================================= */
+
+/* ---------- EMERALD · "Organic / Calm" ---------- */
+:root:has([data-theme-preset="emerald"]) {
+  --sl-color-accent-low: #064e3b;
+  --sl-color-accent: #10b981;
+  --sl-color-accent-high: #a7f3d0;
+  --sl-font: ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+  --preset-radius: 0.9rem;
+  --preset-hspacing: normal;
+}
+
+/* ---------- SAPPHIRE · "Clean / Corporate" ---------- */
+:root:has([data-theme-preset="sapphire"]) {
+  --sl-color-accent-low: #172554;
+  --sl-color-accent: #3b82f6;
+  --sl-color-accent-high: #bfdbfe;
+  --sl-font: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --preset-radius: 0.4rem;
+  --preset-hspacing: -0.01em;
+}
+
+/* ---------- INDIGO · "Modern / Techy" ---------- */
+:root:has([data-theme-preset="indigo"]) {
+  --sl-color-accent-low: #1e1b4b;
+  --sl-color-accent: #6366f1;
+  --sl-color-accent-high: #c7d2fe;
+  --sl-font: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --preset-radius: 0.35rem;
+  --preset-hspacing: -0.02em;
+}
+
+/* ---------- VIOLET · "Creative / Vivid" ---------- */
+:root:has([data-theme-preset="violet"]) {
+  --sl-color-accent-low: #2e1065;
+  --sl-color-accent: #8b5cf6;
+  --sl-color-accent-high: #ddd6fe;
+  --sl-font: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --preset-radius: 0.5rem;
+  --preset-hspacing: -0.01em;
+}
+
+/* ---------- CRIMSON · "Editorial / Bold" ---------- */
+:root:has([data-theme-preset="crimson"]) {
+  --sl-color-accent-low: #881337;
+  --sl-color-accent: #f43f5e;
+  --sl-color-accent-high: #fecdd3;
+  --sl-font: Georgia, "Times New Roman", "Noto Serif", serif;
+  --preset-radius: 0.1rem;
+  --preset-hspacing: -0.01em;
+}
+
+/* ---------- ROSE · "Playful / Soft" ---------- */
+:root:has([data-theme-preset="rose"]) {
+  --sl-color-accent-low: #4c0519;
+  --sl-color-accent: #ec4899;
+  --sl-color-accent-high: #fbcfe8;
+  --sl-font: ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+  --preset-radius: 0.8rem;
+  --preset-hspacing: normal;
+}
+
+/* ---------- AMBER · "Warm / Friendly" ---------- */
+:root:has([data-theme-preset="amber"]) {
+  --sl-color-accent-low: #78350f;
+  --sl-color-accent: #f59e0b;
+  --sl-color-accent-high: #fde68a;
+  --sl-font: ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+  --preset-radius: 0.6rem;
+  --preset-hspacing: normal;
+}
+
+/* ---------- TEAL · "Fresh / Minimal" ---------- */
+:root:has([data-theme-preset="teal"]) {
+  --sl-color-accent-low: #042f2e;
+  --sl-color-accent: #14b8a6;
+  --sl-color-accent-high: #99f6e4;
+  --sl-font: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --preset-radius: 0.5rem;
+  --preset-hspacing: -0.01em;
+}
+
+/* ---------- SLATE · "Mono / Developer" ---------- */
+:root:has([data-theme-preset="slate"]) {
+  --sl-color-accent-low: #0f172a;
+  --sl-color-accent: #64748b;
+  --sl-color-accent-high: #cbd5e1;
+  --sl-font: ui-monospace, "Cascadia Code", "Segoe UI Mono", Consolas, monospace;
+  --preset-radius: 0.1rem;
+  --preset-hspacing: normal;
+}
+
+/* ---------- Terapkan knob "vibe" — HANYA saat ada preset aktif ----------
+   Di-scope ke :root:has([data-theme-preset]) supaya tanpa preset (default),
+   Starlight tetap memakai radius/spacing bawaannya sendiri. */
+:root:has([data-theme-preset]) .sl-markdown-content h1,
+:root:has([data-theme-preset]) .sl-markdown-content h2,
+:root:has([data-theme-preset]) .sl-markdown-content h3 {
+  letter-spacing: var(--preset-hspacing, normal);
+}
+
+:root:has([data-theme-preset]) .sl-markdown-content pre,
+:root:has([data-theme-preset]) .sl-markdown-content img,
+:root:has([data-theme-preset]) .sl-markdown-content .expressive-code,
+:root:has([data-theme-preset]) .card {
+  border-radius: var(--preset-radius, 0.5rem);
+}
