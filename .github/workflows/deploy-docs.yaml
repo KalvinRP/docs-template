@@ -3,6 +3,8 @@ name: Auto Update Docs
 on:
   push:
     branches: [ main, master ]
+  # Deploy ulang secara manual dari tab Actions tanpa perlu commit baru.
+  workflow_dispatch:
 
 permissions:
   contents: read
