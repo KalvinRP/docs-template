@@ -167,7 +167,7 @@ bersama cache `.astro`. Konsekuensinya penting untuk diingat: **jangan pernah me
 berkas di dalam folder itu**, karena perubahanmu akan hilang pada build berikutnya. Semua
 suntingan dilakukan di README.
 
-### What Starlight Provides
+### What This Setup Provides
 
 Bagian ini gratis begitu kontenmu masuk: pencarian *full-text* via Pagefind, toggle
 gelap/terang, daftar isi per halaman dari heading `###`, navigasi halaman sebelumnya /
@@ -202,7 +202,7 @@ Contoh: heading `🧪 Testing` menghasilkan halaman di `/testing/` dengan judul
 
 Untuk mengelompokkan halaman ke dalam satu folder sidebar, pakai format
 `Nama Folder: Judul Halaman`. Grup "Guides" yang sedang kamu baca ini dibuat begitu —
-tiga heading berbeda berbagi awalan `Guides:`, dan Starlight otomatis mengelompokkannya.
+tiga heading berbeda berbagi awalan `Guides:`, dan template otomatis mengelompokkannya.
 
 Satu hal yang perlu diperhatikan: karena tanda titik dua dipakai sebagai pemisah folder,
 **hindari titik dua di heading `##` biasa** kalau kamu tidak ingin halaman itu masuk ke
@@ -281,8 +281,7 @@ CSS yang perlu ditulis, dan tidak ada berkas lain yang perlu disentuh.
 | `teal` | Fresh / Minimal | Sans-serif | Sedang |
 | `slate` | Mono / Developer | Monospace | Nyaris kotak |
 
-Situs yang sedang kamu baca memakai preset **sapphire**. Menghapus penanda `PRESET`
-sepenuhnya akan mengembalikan tampilan ke tema bawaan Astro Starlight.
+Menghapus penanda `PRESET` sepenuhnya akan mengembalikan tampilan ke tema bawaan Astro Starlight.
 
 ### How Presets Work
 
