@@ -372,7 +372,7 @@ Didistribusikan di bawah lisensi **MIT License**. Lihat `LICENSE` untuk keterang
 
 ### Support
 
-* **Repositori:** [github.com/KalvinRP/docs-template](https://github.com/KalvinRP/docs-template)
+* **Repositori:** [github.com/KalvinRP/template](https://github.com/KalvinRP/docs-template)
 * **GitHub Issues:** [Laporkan bug atau usulkan fitur](https://github.com/KalvinRP/docs-template/issues)
 
 ### Built With
