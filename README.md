@@ -3,7 +3,8 @@
 <!-- DELETE_IN_DOCS_START -->
 <p align="center">
   👉 <b><a href="https://kalvinrp.github.io/docs-template">Lihat README ini setelah jadi situs dokumentasi</a></b><br/>
-  <sub>Situs itu dibangun 100% dari berkas <code>README.md</code> yang sedang kamu baca sekarang.</sub>
+  <sub>Situs itu dibangun 100% dari berkas <code>README.md</code> di root.</sub><br/>
+  <sub>Gunakan command <code>npx degit kalvinrp/template nama-project</code> untuk memulai project dengan sistem dokumentasi ini.</sub>
 </p>
 <hr />
 <!-- DELETE_IN_DOCS_END -->
