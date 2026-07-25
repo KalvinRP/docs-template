@@ -1,4 +1,8 @@
-import re, os, shutil
+import re, os, shutil, sys
+
+# Cegah error jika print emoji di Windows
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 # Sesuaikan path karena skrip dipanggil dari root repo saat di CI/CD
 readme_path = "README.md" if os.path.exists("README.md") else "../README.md"
@@ -38,6 +42,32 @@ home_desc = desc_match.group(1).strip() if desc_match else "Dokumentasi proyek."
 
 def yaml_escape(s):
     return s.replace("\\", "\\\\").replace('"', '\\"')
+
+# 🖼️ 1d. ASET LOKAL: terjemahkan path documentation/public/assets/ jadi URL situs
+# README dibaca dari dua titik nol berbeda: di GitHub relatif terhadap root repo, di
+# situs relatif terhadap documentation/public/ ditambah base GitHub Pages. Penulis
+# memakai bentuk yang benar di GitHub, dan bentuk itu diterjemahkan di sini — berkasnya
+# sendiri tidak perlu disalin karena sudah berada di folder statis Astro.
+# Perhitungan base mencerminkan readPagesUrls() di astro.config.mjs.
+owner, _, repo = (os.environ.get("GITHUB_REPOSITORY") or "").partition("/")
+base = "" if not owner or not repo or repo.lower() == f"{owner.lower()}.github.io" else f"/{repo}"
+print(f"🖼️  Base URL aset: {base or '/'}")
+
+def rewrite_asset_paths(text):
+    # Code block dan inline code dilewati, supaya contoh sintaks di dokumentasi tidak
+    # ikut diterjemahkan. re.split dengan grup penangkap menaruh potongan di luar code
+    # pada indeks genap.
+    parts = re.split(r"(```.*?```|`[^`\n]+`)", text, flags=re.DOTALL)
+    for i in range(0, len(parts), 2):
+        parts[i] = re.sub(
+            # Hanya ubah path yang dimulai dengan ./documentation/public/assets/ atau documentation/public/assets/
+            r'(\]\(|src=["\'])(?:\./)?documentation/public/assets/',
+            lambda m: f"{m.group(1)}{base}/assets/",
+            parts[i],
+        )
+    return "".join(parts)
+
+content = rewrite_asset_paths(content)
 
 # 🚀 2. BACA TEMA PRESET (Fitur dari preset-style.py)
 match = re.search(r"<!--\s*PRESET:\s*(\w+)\s*-->", content)

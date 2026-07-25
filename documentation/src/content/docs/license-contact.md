@@ -6,11 +6,19 @@ title: "📜 License & Contact"
 
 
 ### License
-Didistribusikan di bawah lisensi **MIT License**. Lihat `LICENSE` untuk informasi selengkapnya.
+
+Didistribusikan di bawah lisensi **MIT License**. Lihat `LICENSE` untuk keterangan lengkap.
 
 ### Support
-* **Email:** support@kasirku.com
-* **GitHub Issues:** [Laporkan Bug / Masalah](https://github.com/username/kasirku-api/issues)
-* **Community:** [Join Discord Server Kami](https://discord.gg/kasirku)
+
+* **Repositori:** [github.com/KalvinRP/docs-template](https://github.com/KalvinRP/docs-template)
+* **GitHub Issues:** [Laporkan bug atau usulkan fitur](https://github.com/KalvinRP/docs-template/issues)
+
+### Built With
+
+[Astro](https://astro.build) · [Starlight](https://starlight.astro.build) ·
+[Pagefind](https://pagefind.app) · GitHub Actions · GitHub Pages
+
+![Gambar Penutup](/assets/marek-piwnicki-unsplash.jpg)
 
 </div>

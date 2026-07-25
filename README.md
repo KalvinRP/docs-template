@@ -83,10 +83,16 @@ GitHub Actions. Yang berikut hanya diperlukan bila ingin *preview* lokal:
 
 ### Installation
 
-1. **Fork** atau *Use this template* pada repositori ini.
-2. Aktifkan GitHub Pages: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Tulis dokumentasi proyekmu di `README.md` (ganti seluruh isi berkas ini).
-4. Commit dan push ke `main`:
+1. Klik *Use this template* pada repositori ini atau degit pada local:
+
+    ```bash
+    npx degit kalvinrp/template nama-project
+    ```
+
+2. Kembangkan project pada root kemudian push jika masih lokal.
+3. Tulis dokumentasi proyekmu di `README.md` (ganti seluruh isi berkas ini). Gambar dan aset lokal lain disimpan di `documentation/public/assets/` — lihat **Guides → Page Structure**.
+4. Aktifkan GitHub Pages: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+5. Commit dan push ke `main`:
 
    ```bash
    git add README.md
@@ -94,7 +100,7 @@ GitHub Actions. Yang berikut hanya diperlukan bila ingin *preview* lokal:
    git push origin main
    ```
 
-Workflow `Auto Update Docs` akan jalan sendiri, dan situsmu terbit di
+Workflow `Auto Update Docs` akan jalan sendiri, dan situs dokumentasi terbit di
 `https://<username>.github.io/<nama-repo>`.
 
 ### Configuration
@@ -140,6 +146,7 @@ README.md                          ← satu-satunya berkas yang kamu tulis
     │  python3 documentation/dev-build.py
     │  · buang blok DELETE_IN_DOCS
     │  · ambil title dari H1, description dari tagline
+    │  · terjemahkan path aset lokal jadi URL situs
     │  · pecah tiap "##" jadi satu halaman + frontmatter
     │  · bungkus konten dengan penanda preset tema
     ▼
@@ -155,6 +162,7 @@ documentation/dist/  ──▶  GitHub Pages
 | Path | Peran |
 |---|---|
 | `README.md` | Sumber tunggal seluruh isi dokumentasi |
+| `documentation/public/assets/` | Gambar dan aset lokal yang dirujuk README |
 | `documentation/dev-build.py` | Pemecah README → halaman Markdown ber-frontmatter |
 | `documentation/astro.config.mjs` | Konfigurasi Starlight; membaca judul & deskripsi dari README |
 | `documentation/docs/src/styles/preset.css` | Definisi seluruh preset tema |
@@ -214,6 +222,31 @@ dalam folder.
 `###` ke bawah tetap berada di dalam halaman yang sama dan otomatis menjadi entri daftar
 isi di sisi kanan. Pakai ini untuk membagi isi halaman, seperti bagian yang sedang kamu
 baca sekarang.
+
+### Local Images and Assets
+
+Taruh gambar di `documentation/public/assets/`, lalu rujuk dengan path relatif dari root
+repo — persis seperti yang GitHub harapkan:
+
+```markdown
+![Diagram Arsitektur](./documentation/public/assets/diagram.png)
+```
+
+Path itu memang terlihat panjang, dan itu disengaja: ia ditulis dalam bentuk yang benar
+saat README dibaca **langsung di GitHub**. Situs docs punya titik nol yang berbeda —
+akarnya `documentation/public/` ditambah `base` GitHub Pages — jadi `dev-build.py`
+menerjemahkan rujukan tadi menjadi `/<nama-repo>/assets/diagram.png` saat build. Satu
+path yang kamu tulis, benar di dua tempat, tanpa berkas yang perlu diduplikasi.
+
+Yang perlu diingat:
+
+* Berkasnya sudah berada di folder statis Astro, jadi tidak ada penyalinan — cukup
+  tambahkan gambar ke folder itu dan rujuk dari README.
+* Yang diterjemahkan hanya bentuk `./documentation/public/assets/…`. Path absolut
+  (diawali `/`) dan URL eksternal dibiarkan apa adanya.
+* Berlaku untuk sintaks Markdown maupun atribut `src` pada HTML, jadi `<img>` juga aman.
+* Contoh di dalam *code block* dan *inline code* tidak ikut diterjemahkan — berbeda dari
+  penanda `DELETE_IN_DOCS`, kamu bebas mendokumentasikan path aset tanpa efek samping.
 
 ### Limitations
 
@@ -346,3 +379,5 @@ Didistribusikan di bawah lisensi **MIT License**. Lihat `LICENSE` untuk keterang
 
 [Astro](https://astro.build) · [Starlight](https://starlight.astro.build) ·
 [Pagefind](https://pagefind.app) · GitHub Actions · GitHub Pages
+
+![Gambar Penutup](./documentation/public/assets/marek-piwnicki-unsplash.jpg)
